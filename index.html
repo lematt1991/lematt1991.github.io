@@ -10,7 +10,7 @@ layout: landing
 	<a href="#one" class="more scrolly">Learn More</a>
 </section>
 
-<section id="one" class="wrapper style1 special">
+<section id="software" class="wrapper style1 special">
 	<div class="inner">
 		<header class="major">
 			<h3>Software</h3>
@@ -32,7 +32,7 @@ layout: landing
 	</div>
 </section>
 
-<section id="two" class="wrapper style2 special">
+<section id="research" class="wrapper style2 special">
 	<div class="inner">
 		<header class="major">
 			<h3>Research</h3>
@@ -71,7 +71,7 @@ layout: landing
 </section>
 
 
-<section id="three" class="wrapper style3 special">
+<section id="homebrewing" class="wrapper style3 special">
 	<div class="inner">
 		<header class="major">
 			<h2>Homebrewing</h2>
@@ -81,30 +81,18 @@ layout: landing
 			</p>
 		</header>
 		<ul class="features">
-			<li class="icon fa-paper-plane-o">
-				<h3>Arcu accumsan</h3>
-				<p>Augue consectetur sed interdum imperdiet et ipsum. Mauris lorem tincidunt nullam amet leo Aenean ligula consequat consequat.</p>
-			</li>
-			<li class="icon fa-laptop">
-				<h3>Ac Augue Eget</h3>
-				<p>Augue consectetur sed interdum imperdiet et ipsum. Mauris lorem tincidunt nullam amet leo Aenean ligula consequat consequat.</p>
-			</li>
-			<li class="icon fa-code">
-				<h3>Mus Scelerisque</h3>
-				<p>Augue consectetur sed interdum imperdiet et ipsum. Mauris lorem tincidunt nullam amet leo Aenean ligula consequat consequat.</p>
-			</li>
-			<li class="icon fa-headphones">
-				<h3>Mauris Imperdiet</h3>
-				<p>Augue consectetur sed interdum imperdiet et ipsum. Mauris lorem tincidunt nullam amet leo Aenean ligula consequat consequat.</p>
-			</li>
-			<li class="icon fa-heart-o">
-				<h3>Aenean Primis</h3>
-				<p>Augue consectetur sed interdum imperdiet et ipsum. Mauris lorem tincidunt nullam amet leo Aenean ligula consequat consequat.</p>
-			</li>
-			<li class="icon fa-flag-o">
-				<h3>Tortor Ut</h3>
-				<p>Augue consectetur sed interdum imperdiet et ipsum. Mauris lorem tincidunt nullam amet leo Aenean ligula consequat consequat.</p>
-			</li>
+			{% for post in site.posts %}
+				{% if post.type == "homebrew_recipe" %}
+			    <li class="icon fa-beer">
+			    	<h3>{{ post.title }}</h3>
+			    	<h5>Brewed on: {{ post.brew_date }}</h5>
+			    	<p>{{ post.short_description }}</p>
+			    	<a href="#homebrewing" class="button special">
+							More Info
+						</a>
+			    </li>
+		    {% endif %}
+		  {% endfor %}
 		</ul>
 	</div>
 </section>
