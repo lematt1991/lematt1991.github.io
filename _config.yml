@@ -1,0 +1,24 @@
+# Welcome to Jekyll!
+#
+
+# Site settings
+title: Matt Le
+description: |
+  Software developer at  
+  The Arnhold Institute for Global Health  
+  in New York City  
+owner: Matt Le # or company name
+first_published: 2017 # if migrating another site, the year of your first publish
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "http://matt-le.ml" # the base hostname & protocol for your site
+social:
+  twitter: https://twitter.com/beerfeed
+  github: https://github.com/ml9951
+  linkedin-square: https://www.linkedin.com/in/matthew-le-8a0175116/
+  #spotify:
+  stack-overflow: http://stackoverflow.com/users/4876946/matt
+
+# Build settings
+markdown: kramdown
+#sass:
+#  style: compressed
