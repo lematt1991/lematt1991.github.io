@@ -35,7 +35,7 @@ for file in glob.glob('recipes/*.html'):
 	newFile.write('---\n')
 	newFile.write('title: %s\n' % title)
 	newFile.write('bjcp_cat: %s\n' % bjcpCat)
-	newFile.write('brew_date: %s\n' % date)
+	newFile.write('brew_date: %s\n' % date.strftime("%d, %b %Y"))
 	newFile.write('type: homebrew_recipe\n')
 	newFile.write('short_description: %s\n' % short_description)
 	newFile.write('page_url: %s\n' % file)
