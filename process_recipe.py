@@ -5,7 +5,7 @@ import pdb, os, glob, re, datetime
 from shutil import copyfile
 
 
-for file in glob.glob('recipes/*.html'):
+for file in glob.glob('raw_recipes/*.html'):
 	soup = BeautifulSoup(open(file).read(), "html.parser")
 	title = soup.find('title').text.strip()
 	bjcpCat = soup.find('div', 'logo').find('h2').text.strip()
@@ -25,12 +25,20 @@ for file in glob.glob('recipes/*.html'):
 		print('Copying %s to %s' % (img['src'], newImg))
 		copyfile(img['src'], newImg)
 	img['src'] = '/%s' % newImg	
-	open(file, 'w').write(soup.prettify())
 
-	basename = os.path.splitext(os.path.basename(file))[0]
-	newFilename = '_posts/%d-%d-%d-%s.md' % (date.year, date.month, date.day, basename)
+	basename = os.path.basename(file)
+	newBasename = re.sub('( |\:)+', '-', basename)
 
-	newFile = open(newFilename, 'w')
+	newHTMLFile = open('recipes/%s' % newBasename, 'w')
+	newHTMLFile.write('---\nlayout: landing\n---\n')
+	newHTMLFile.write('<section id="recipe" class="wrapper style3 special">\n')
+	newHTMLFile.write('<div class="inner">\n')
+	newHTMLFile.write(soup.find('div', {'id' : 'wrapper'}).prettify())
+	newHTMLFile.write('</section>\n</div>\n')
+
+	markdownFilename = '_posts/%d-%d-%d-%s.md' % (date.year, date.month, date.day, os.path.splitext(newBasename)[0])
+
+	newFile = open(markdownFilename, 'w')
 
 	newFile.write('---\n')
 	newFile.write('title: %s\n' % title)
@@ -38,7 +46,7 @@ for file in glob.glob('recipes/*.html'):
 	newFile.write('brew_date: %s\n' % date.strftime("%d, %b %Y"))
 	newFile.write('type: homebrew_recipe\n')
 	newFile.write('short_description: %s\n' % short_description)
-	newFile.write('page_url: %s\n' % file)
+	newFile.write('page_url: %s\n' % '/recipes/%s' % newBasename)
 	newFile.write('---\n')
 
 
