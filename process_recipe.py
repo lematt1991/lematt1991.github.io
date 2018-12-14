@@ -66,7 +66,7 @@ def format_mash(t):
 		description += f'Add {amt/16} qt of water'
 	else:
 		description += f'Add {amt} oz of water'
-	description += f' at {infusion_temp} F'
+	description += f' at {infusion_temp : .2f} F'
 	return {
 		'name': t.find('f_ms_name').text,
 		'description': description,
