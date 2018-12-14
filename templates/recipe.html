@@ -1,0 +1,74 @@
+---
+layout: landing
+---
+<section id="recipe" class="wrapper style3 special">
+    <div class="inner">
+        <div id="wrapper">
+            <div id="header">
+                <div class="logo">
+                    <h1>
+					    {{ name }}
+					</h1>
+                    <h2>
+					    {{ style }}
+					</h2>
+                </div>
+            </div>
+            <div class="glass">
+				<img height="128" src="{{ image }}" width="75"/>
+			</div>
+
+			<div class="full">
+                <table cellpadding="0" cellspacing="0" class="BeerSmithTable" width="100%">
+                    <caption> <h2>Details</h2></caption>
+                    {% for key, value in details.items() %}
+                    <tr>
+                        <td align="left">{{ key }}</td>
+                        <td align="left">{{ value }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+
+            <div class="full">
+                <table cellpadding="0" cellspacing="0" class="BeerSmithTable" width="100%">
+                    <caption> <h2>Ingredients</h2></caption>
+                    <tr>
+                        <td align="left"><b>Amount</b></td>
+                        <td align="left"><b>Name</b></td>
+                        <td align="left"><b>Type</b></td>
+                        <td align="left"><b>%/IBU</b></td>
+                    </tr>
+                    {% for ingredient in ingredients %}
+                    <tr>
+                        <td align="left">{{ ingredient.amount }}</td>
+                        <td align="left">{{ ingredient.name }}</td>
+                        <td align="left">{{ ingredient.type }}</td>
+                        <td align="left">{{ ingredient.ibu_percent }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+
+            <div class="full">
+                <table cellpadding="0" cellspacing="0" class="BeerSmithTable" width="100%">
+                    <caption> <h2>Mash Steps</h2></caption>
+                    <tr>
+                        <td align="left"><b>Name</b></td>
+                        <td align="left"><b>Description</b></td>
+                        <td align="left"><b>Temp</b></td>
+                        <td align="left"><b>Time</b></td>
+                    </tr>
+                    {% for mash in mashs %}
+                    <tr>
+                        <td align="left">{{ mash.name }}</td>
+                        <td align="left">{{ mash.description }}</td>
+                        <td align="left">{{ mash.temp }}</td>
+                        <td align="left">{{ mash.time }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
