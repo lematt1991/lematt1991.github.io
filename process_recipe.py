@@ -87,7 +87,7 @@ def tohtml(recipe):
 			details={
 				'Type': recipe.find('f_e_name').text,
 				'Boil Time': f'{int(float(recipe.find("f_g_boil_time").text))} Minutes',
-				'Date Brewed': recipe.find('f_r_date').text,
+				'Date Brewed': date.strftime('%B %d, %Y'),
 				'Mash Type': recipe.find('f_mh_name').text,
 			},
 			ingredients=[format_ingredient(i) for i in recipe.find('ingredients').find('data').children if i.name],
