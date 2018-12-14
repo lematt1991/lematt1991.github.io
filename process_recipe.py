@@ -7,11 +7,17 @@ import re
 from jinja2 import Template
 import numpy as np
 from ingredient_parser import parsers
+from datetime import datetime
 
 os.makedirs('recipes', exist_ok=True)
 
 with open('templates/recipe.html', 'r') as fin:
-	template = Template(fin.read())
+	html_template = Template(fin.read())
+
+	
+with open('templates/recipe.md', 'r') as fin:
+	md_template = Template(fin.read())
+
 
 recipe_file = os.path.expanduser('~/Documents/BeerSmith2/Recipe.bsmx')
 
@@ -72,9 +78,9 @@ def format_mash(t):
 def tohtml(recipe):
 	name = recipe.find('f_r_name').text
 	filename = re.sub(r'(\s|\/)+', '_', name)
-
+	date = datetime.strptime(recipe.find('f_r_date').text, '%Y-%m-%d')
 	with open(f'recipes/{filename}.html', 'w') as fout:
-		fout.write(template.render(
+		fout.write(html_template.render(
 			name=name,
 			style=get_style(recipe),
 			image=get_image(recipe),
@@ -87,6 +93,18 @@ def tohtml(recipe):
 			ingredients=[format_ingredient(i) for i in recipe.find('ingredients').find('data').children if i.name],
 			mashs=[format_mash(i) for i in recipe.find_all('mashstep')]
 		))
+
+	markdown_file = f'_posts/{date.date().isoformat()}-{filename}.md'
+	# pdb.set_trace()
+	with open(markdown_file, 'w') as fout:
+		fout.write(md_template.render(
+			title = name,
+			category = get_style(recipe),
+			date = date.strftime('%B %d, %Y'),
+			description = recipe.find('f_r_notes').text,
+			page = f'/recipes/{filename}.html'
+		))
+
 
 for r in recipes:
 	tohtml(r)
