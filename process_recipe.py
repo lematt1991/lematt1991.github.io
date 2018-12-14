@@ -8,6 +8,8 @@ from jinja2 import Template
 import numpy as np
 from ingredient_parser import parsers
 
+os.makedirs('recipes', exist_ok=True)
+
 with open('templates/recipe.html', 'r') as fin:
 	template = Template(fin.read())
 
@@ -65,7 +67,7 @@ def format_mash(t):
 		'temp': temp,
 		'time': f'{time} min'
 	}
-	
+
 
 def tohtml(recipe):
 	name = recipe.find('f_r_name').text
@@ -88,5 +90,3 @@ def tohtml(recipe):
 
 for r in recipes:
 	tohtml(r)
-
-	import sys; sys.exit(0)
