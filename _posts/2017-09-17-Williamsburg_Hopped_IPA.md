@@ -1,6 +1,6 @@
 ---
 title: Williamsburg Hopped IPA
-bjcp_cat: American Amber Ale (6 B)
+bjcp_cat: American IPA (14 B)
 brew_date: September 17, 2017
 type: homebrew_recipe
 short_description: An IPA brewed with homegrown hops from a friend in Williamsburg
