@@ -22,3 +22,5 @@ social:
 markdown: kramdown
 #sass:
 #  style: compressed
+exclude:
+  - templates
