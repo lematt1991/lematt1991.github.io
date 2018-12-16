@@ -32,8 +32,9 @@ class HopParser(IngredientParser):
 		return f'{amt:.1f} IBUs'
 
 	def get_boil_time(self, t):
+		use = int(t.find('f_h_use').text)
 		amt = int(float(t.find('f_h_boil_time').text))
-		if amt == 0:
+		if use == 1:
 			return 'Dry Hop'
 		else:
 			return f'{amt} min'
