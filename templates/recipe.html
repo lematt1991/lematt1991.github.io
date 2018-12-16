@@ -38,6 +38,7 @@ layout: landing
                         <td align="left"><b>Name</b></td>
                         <td align="left"><b>Type</b></td>
                         <td align="left"><b>%/IBU</b></td>
+                        <td align="left"><b>Boil Time</b></td>
                     </tr>
                     {% for ingredient in ingredients %}
                     <tr>
@@ -45,6 +46,7 @@ layout: landing
                         <td align="left">{{ ingredient.name }}</td>
                         <td align="left">{{ ingredient.type }}</td>
                         <td align="left">{{ ingredient.ibu_percent }}</td>
+                        <td align="left">{{ ingredient.boil_time}}</td>
                     </tr>
                     {% endfor %}
                 </table>

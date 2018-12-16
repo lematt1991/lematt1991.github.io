@@ -21,12 +21,22 @@ class IngredientParser:
 	def get_ibu_percent(self, t):
 		return '-'
 
+	def get_boil_time(self, t):
+		return '-'
+
 class HopParser(IngredientParser):
 	prefix = 'f_h'
 
 	def get_ibu_percent(self, t):
 		amt = float(t.find('f_h_ibu_contrib').text)
 		return f'{amt:.1f} IBUs'
+
+	def get_boil_time(self, t):
+		amt = int(float(t.find('f_h_boil_time').text))
+		if amt == 0:
+			return 'Dry Hop'
+		else:
+			return f'{amt} min'
 
 class GrainParser(IngredientParser):
 	prefix = 'f_g'

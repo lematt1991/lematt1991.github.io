@@ -54,6 +54,7 @@ def format_ingredient(t):
 		'amount': parser.get_amount(t),
 		'name': parser.get_name(t),
 		'ibu_percent': parser.get_ibu_percent(t),
+		'boil_time': parser.get_boil_time(t),
 	}
 
 def format_mash(t):
