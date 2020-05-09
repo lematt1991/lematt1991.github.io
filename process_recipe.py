@@ -75,12 +75,35 @@ def format_mash(t):
 		'time': f'{time} min'
 	}
 
+def parse_water_profile(wp):
+	fields = {
+		'f_w_ph': 'PH',
+		'f_w_calcium': 'Calcium',
+		'f_w_magnesium': 'Magnesium',
+		'f_w_sodium': 'Sodium',
+		'f_w_sulfate': 'Sulfate',
+		'f_w_chloride': 'Chloride',
+		'f_w_bicarb': 'Bicarbonate',
+	}
+	profile = []
+	for k, v in fields.items():
+		val = float(wp.find(k).text)
+		profile.append({
+			'name': v,
+			'value': f'{val:.2f}ppm'	
+		})
+	return profile
 
 def tohtml(recipe):
 	name = recipe.find('f_r_name').text
 	filename = re.sub(r'(\s|\/)+', '_', name)
 	date = datetime.strptime(recipe.find('f_r_date').text, '%Y-%m-%d')
 	with open(f'recipes/{filename}.html', 'w') as fout:
+		water = [i for i in recipe.find('ingredients').find('data').children if i.name == 'water']
+		water_profile = []
+		if len(water) > 0:
+			water_profile = parse_water_profile(water[0])
+
 		fout.write(html_template.render(
 			name=name,
 			style=get_style(recipe),
@@ -91,8 +114,9 @@ def tohtml(recipe):
 				'Date Brewed': date.strftime('%B %d, %Y'),
 				'Mash Type': recipe.find('f_mh_name').text,
 			},
-			ingredients=[format_ingredient(i) for i in recipe.find('ingredients').find('data').children if i.name],
-			mashs=[format_mash(i) for i in recipe.find_all('mashstep')]
+			ingredients=[format_ingredient(i) for i in recipe.find('ingredients').find('data').children if parsers.get(i.name, None)],
+			mashs=[format_mash(i) for i in recipe.find_all('mashstep')],
+			water_profile=water_profile
 		))
 
 	markdown_file = f'_posts/{date.date().isoformat()}-{filename}.md'
