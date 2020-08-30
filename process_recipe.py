@@ -63,8 +63,8 @@ def format_mash(t):
 	temp = float(t.find('f_ms_step_temp').text)
 	time = float(t.find('f_ms_step_time').text)
 	description = ''
-	if amt > 16:
-		description += f'Add {amt/16} qt of water'
+	if amt > 32:
+		description += f'Add {amt/32} qt of water'
 	else:
 		description += f'Add {amt} oz of water'
 	description += f' at {infusion_temp : .2f} F'
