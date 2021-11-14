@@ -19,7 +19,7 @@ with open('templates/recipe.md', 'r') as fin:
 	md_template = Template(fin.read())
 
 
-recipe_file = os.path.expanduser('~/Documents/BeerSmith2/Recipe.bsmx')
+recipe_file = os.path.expanduser('~/Library/Application Support/BeerSmith3/Recipe.bsmx')
 
 if not os.path.exists(recipe_file):
 	raise ValueError("Couldn't find recipe file!")
